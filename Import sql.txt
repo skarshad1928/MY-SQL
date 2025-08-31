@@ -1,0 +1,79 @@
+
+---
+
+# 📘 MySQL Import & User Roles – Notes
+
+## 🔹 Ways to Import `.sql` file
+
+### 1. Using **MySQL Workbench (GUI)**
+
+1. Open **MySQL Workbench**.
+2. Go to **Server > Data Import**.
+3. Choose **Import from Self-Contained File** → Select your `.sql` file.
+4. Select Database (create new if needed).
+5. Click **Start Import**.
+
+---
+
+### 2. Using **MySQL CLI (Command Line)**
+
+1. Open **CMD/Terminal**.
+2. Navigate to folder where `.sql` file is stored:
+
+   ```bash
+   cd "C:\Users\Shaik Arshad\Downloads"
+   ```
+3. Run import command:
+
+   ```bash
+   mysql -u username -p database_name < file.sql
+   ```
+4. Enter password → File will be imported.
+
+⚠️ Note:
+
+* Use `<` for **import**.
+* Use `>` for **export (dump)**.
+
+---
+
+## 🔹 Internet Requirement
+
+* **Localhost Database** → ❌ No internet needed.
+* **Remote Database (Cloud, AWS, etc.)** → ✅ Internet required.
+
+---
+
+## 🔹 Multi-User Access in MySQL
+
+MySQL allows multiple users. You can assign roles with different permissions.
+
+### Example Commands:
+
+```sql
+-- Create user
+CREATE USER 'arshad'@'localhost' IDENTIFIED BY 'password123';
+
+-- Read-only access
+GRANT SELECT ON collegeHackathon.* TO 'arshad'@'localhost';
+
+-- Developer access (read + write, no drop)
+GRANT SELECT, INSERT, UPDATE, DELETE ON collegeHackathon.* TO 'devuser'@'localhost';
+
+-- Admin access (full privileges)
+GRANT ALL PRIVILEGES ON collegeHackathon.* TO 'adminuser'@'localhost';
+
+-- Apply changes
+FLUSH PRIVILEGES;
+```
+
+---
+
+## 🔹 Summary
+
+* Import `.sql` → Workbench (GUI) or CLI (Command Line).
+* Internet not needed for local DB.
+* Multiple users can access same DB → Permissions are controlled with roles.
+
+---
+
